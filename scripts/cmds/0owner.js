@@ -16,12 +16,12 @@ config: {
   onStart: async function ({ api, event }) {
   try {
     const ownerInfo = {
-      name: 'Yazky Ai',
-      gender: 'Male',
-      age: 'Unknown',
+      name: '𝙃𝙚𝙖𝙫𝙚𝙣 𝘾𝙤𝙣𝙩𝙧𝙤 𝙉𝙨𝙝𝙞 𝙎𝙠𝙚𝙩𝙘𝙝𝙚𝙧',
+      gender: 'female',
+      age: '17',
       height: 'Unknown',
-      facebookLink: 'stalk moko mwa',
-      nick: 'Yazky'
+      facebookLink: 'https://www.facebook.com/profile.php?id=61557094816783',
+      nick: '𝙃𝙚𝙖𝙫𝙚𝙣'
     };
 
     const bold = 'https://i.imgur.com/DDO686J.mp4'; // Replace with your Google Drive videoid link https://drive.google.com/uc?export=download&id=here put your video id
