@@ -1,87 +1,65 @@
+const fs = require("fs-extra");
+const os = require("os");
+const path = require("path");
+const axios = require("axios");
+
 module.exports = {
- config: {
- name: "sing",
- version: "1.0",
- role: 0,
- author: "kshitiz",
- cooldowns: 5,
- shortdescription: "download music from YouTube",
- longdescription: "",
- category: "music",
- usages: "{pn} music name",
- dependencies: {
- "fs-extra": "",
- "request": "",
- "axios": "",
- "ytdl-core": "",
- "yt-search": ""
- }
- },
+  config: {
+    name: "sing",
+    aliases: ["music", "song"],
+    version: "1.1",
+    role: 0,
+    author: "Shikaki | Base code: AceGun",
+    cooldowns: 5,
+    description: "Download music from Youtube",
+    category: "media",
+    usages: "{pn}music name",
+  },
 
- onStart: async ({ api, event }) => {
- const axios = require("axios");
- const fs = require("fs-extra");
- const ytdl = require("ytdl-core");
- const request = require("request");
- const yts = require("yt-search");
+  onStart: async ({ api, event }) => {
+    const input = event.body;
+    const data = input.split(" ");
 
- const input = event.body;
- const text = input.substring(12);
- const data = input.split(" ");
+    if (data.length < 2) {
+      return api.sendMessage("Please specify a music name!", event.threadID);
+    }
 
- if (data.length < 2) {
- return api.sendMessage("Please specify a music name.", event.threadID);
- }
+    data.shift();
+    const musicName = data.join(" ");
 
- data.shift();
- const musicName = data.join(" ");
+    ("⌛", event.messageID, () => { }, true);
 
- try {
- api.sendMessage(`✔ | Searching music for "${musicName}"...`, event.threadID);
+    try {
+      console.log("1. Downloading...");
+      const response = await axios.get(`https://shikakiapis-theone2277s-projects.vercel.app/vmam/apis?yt=${musicName}&type=s`, { responseType: 'arraybuffer' });
+      console.log("2. Downloaded and sending...");
 
- const searchResults = await yts(musicName);
- if (!searchResults.videos.length) {
- return api.sendMessage("kunai music vetiyena.", event.threadID, event.messageID);
- }
+      const fileName = `${new Date().getTime()}.mp3`;
+      const tempDir = os.tmpdir();
+      const filePath = path.join(tempDir, fileName);
 
- const music = searchResults.videos[0];
- const musicUrl = music.url;
+      fs.writeFileSync(filePath, response.data);
 
- const stream = ytdl(musicUrl, { filter: "audioonly" });
+      if (fs.statSync(filePath).size > 26214400) {
+        fs.unlinkSync(filePath);
+        return api.sendMessage("❌ | The file could not be sent because it is larger than 25MB.", event.threadID);
+      }
 
- const fileName = `${event.senderID}.mp3`;
- const filePath = __dirname + `/cache/${fileName}`;
+      const message = {
+        body: `💁🏻‍♂ • Here's your music!\n\n♥ • Title: ${musicName}`,
+        attachment: fs.createReadStream(filePath),
+      };
 
- stream.pipe(fs.createWriteStream(filePath));
+      api.sendMessage(message, event.threadID, () => {
+        fs.unlinkSync(filePath);
+        console.log("3. Sent successfully!");
+      });
 
- stream.on('response', () => {
- console.info('[DOWNLOADER]', 'Starting download now!');
- });
-
- stream.on('info', (info) => {
- console.info('[DOWNLOADER]', `Downloading music: ${info.videoDetails.title}`);
- });
-
- stream.on('end', () => {
- console.info('[DOWNLOADER] Downloaded');
-
- if (fs.statSync(filePath).size > 26214400) {
- fs.unlinkSync(filePath);
- return api.sendMessage('❌ | The file could not be sent because it is larger than 25MB.', event.threadID);
- }
-
- const message = {
- body: `🙆‍♀️ Here's the Music\ ❀ Title: ${music.title}\ Duration: ${music.duration.timestamp}`,
- attachment: fs.createReadStream(filePath)
- };
-
- api.sendMessage(message, event.threadID, () => {
- fs.unlinkSync(filePath);
- });
- });
- } catch (error) {
- console.error('[ERROR]', error);
- api.sendMessage('🥱 ❀ An error occurred while processing the command.', event.threadID);
- }
- }
+      await ("✅", event.messageID, () => { }, true);
+    } catch (error) {
+      console.error("[ERROR]", error);
+      ("❌", event.messageID, () => { }, true);
+      return;
+    }
+  },
 };
