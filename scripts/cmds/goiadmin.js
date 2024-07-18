@@ -9,12 +9,12 @@ config: {
   guide: "{pn}"
 },
   onStart: async function ({ api, event }) {
-  if (event.senderID !== "100027867581039") {
-    var aid = ["100027867581039"];
+  if (event.senderID !== "61557094816783") {
+    var aid = ["61557094816783"];
     for (const id of aid) {
     if ( Object.keys(event.mentions) == id) {
-      var msg = ["Don't tag admin, he's busy 😗", "Admin is currently unavailable 🤧", "Sorry, admin is offline 😪","Do you like my admin thats why your tagging him? 😏"," Another tag in my admin, i will punch you 🙂"];
-      api.setMessageReaction("😍", event.messageID, (err) => {}, true);
+      var msg = ["Don't tag admin, get lost🤨", "Admin said fark you🙂", "Sorry, admin is offline 😪","Do you like my admin thats why your tagging her? 😏"," Another tag in my admin, i will punch you 🙂"];
+      ("😍", event.messageID, (err) => {}, true);
       return api.sendMessage({body: msg[Math.floor(Math.random()*msg.length)]}, event.threadID, event.messageID);
     }
     }}
