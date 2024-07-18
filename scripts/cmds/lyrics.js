@@ -1,45 +1,47 @@
 const axios = require("axios");
+const fs = require("fs-extra");
+const path = require("path");
 
 module.exports = {
   config: {
-    name: "lyrics",
-    version: "1.0",
-    author: "MILAN",
-    countDown: 5,
+    name: 'lyrics',
+    version: '2.0',
+    author: 'ArYAN',
     role: 0,
-    shortDescription: {
-      vi: "Nhận lời bài hát",
-      en: "Get song lyrics"
-    },
+    category: 'music',
     longDescription: {
-      vi: "Nhận lời bài hát với Hình ảnh của họ",
-      en: "Get song lyrics with their Images"
+      en: 'This command allows you to search song lyrics from Google',
     },
-    category: "info",
     guide: {
-      en: "{pn} <song name>"
-    }
+      en: '{p}lyrics [ Song Name ]',
+    },
   },
-  
-  onStart: async function ({ api, event, args, message }) {
+
+  onStart: async function ({ api, event, args }) {
     try {
-      const lyrics = args.join(' ');
-      if (!lyrics) {
-        return api.sendMessage("Please provide a song name!", event.threadID, event.messageID);
+      const songName = args.join(" ");
+      if (!songName) {
+        api.sendMessage("⛔ 𝗜𝗻𝘃𝗮𝗹𝗶𝗱 𝗧𝗶𝘁𝗹𝗲\n\n➤ Please provide a song name!", event.threadID, event.messageID);
+        return;
       }
-      const { data } = await axios.get(`https://milanbhandari.imageapi.repl.co/lyrics`, {
-        params: {
-          query: lyrics 
-        }
+
+      const apiUrl = `https://global-sprak.onrender.com/api/lyrics?songName=${encodeURIComponent(songName)}`;
+      const response = await axios.get(apiUrl);
+      const { lyrics, title, artist, image } = response.data;
+
+      if (!lyrics) {
+        api.sendMessage("⛔ 𝗡𝗼𝘁 𝗙𝗼𝘂𝗻𝗱\n\n➤ Sorry, lyrics not found. Please provide another song name!", event.threadID, event.messageID);
+        return;
+      }
+
+      let message = `🎶 𝗟𝗬𝗥𝗜𝗖𝗦\n\nℹ 𝗧𝗶𝘁𝗹𝗲\n➪ ${title}\n👑 𝗔𝗿𝘁𝗶𝘀𝘁\n➪ ${artist}\n🔎 𝗟𝘆𝗿𝗶𝗰𝘀\n━━━━━━━━━━━━━━━\n${lyrics}`;
+      let attachment = await global.utils.getStreamFromURL(image);
+      api.sendMessage({ body: message, attachment }, event.threadID, (err, info) => {
+        let id = info.messageID;
       });
-      const messageData = {
-        body: `❏Title: ${data.title || ''}\n\n❏Artist: ${data.artist || ''}\n\n❏Lyrics:\n\n ${data.lyrics || ''}`,
-        attachment: await global.utils.getStreamFromURL(data.image)
-      };
-      return api.sendMessage(messageData, event.threadID);
     } catch (error) {
       console.error(error);
-      return api.sendMessage("An error occurred while fetching lyrics!", event.threadID, event.messageID);
+      api.sendMessage("⛔ 𝗦𝗲𝗿𝘃𝗲𝗿 𝗘𝗿𝗿𝗼𝗿\n\n➤ Sorry, there was an error getting the lyrics! " + error.message, event.threadID, event.messageID);
     }
-  }
+  },
 };
