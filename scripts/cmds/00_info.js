@@ -37,16 +37,16 @@ module.exports = {
 
 		message.reply({
 			body: `《  Bot & Owner Info 》
-\Name: ${botName}
-\Bot Prefix: ${botPrefix}
-\owner: ${authorName}
-\Age : ${ownAge}
-\Facebook: ${authorFB}
-\Instagram: ${authorInsta}
-\TikTok: ${tikTok}
+\Name: ${𝐇𝐄𝐀𝐕𝐄𝐍 𝐁𝐎𝐓}
+\Bot Prefix: ${-}
+\owner: ${𝙃𝙀𝘼𝙑𝙀𝙉 𝘾𝙊𝙉𝙏𝙍𝙊}
+\Age : ${17}
+\Facebook: ${https://www.facebook.com/profile.php?id=61557094816783}
+\Instagram: ${nevermind}
+\TikTok: ${unknown}
 \Date: ${date}
 \Time: ${time}
-\Team: ${teamName}
+\Team: ${github team Heaven}
 \Uptime: ${uptimeString}
 \===============`,
 			attachment: await global.utils.getStreamFromURL(link)
