@@ -2,10 +2,10 @@ const moment = require("moment-timezone");
 
 module.exports = {
   config: {
-    name: "accept",
+    name: "acp",
     aliases: ['acp'],
     version: "1.0",
-    author: "Loid Butter",
+    author: "UPoL The MoMis Momo ☺️🌸",
     countDown: 8,
     role: 2,
     shortDescription: "accept users",
@@ -14,11 +14,20 @@ module.exports = {
   },
 
   onReply: async function ({ message, Reply, event, api, commandName }) {
+    const upol = ["61557094816783"];
+    if (!upol.includes(event.senderID)) {
+      api.sendMessage(
+        "⚠️ You don't have enough permission to use this command bitch. Only HEAVEN can do it and control me.",
+        event.threadID,
+        event.messageID
+      );
+      return;
+    }
     const { author, listRequest, messageID } = Reply;
     if (author !== event.senderID) return;
     const args = event.body.replace(/ +/g, " ").toLowerCase().split(" ");
 
-    clearTimeout(Reply.unsendTimeout); // Clear the timeout if the user responds within the countdown duration
+    clearTimeout(Reply.unsendTimeout);
 
     const form = {
       av: api.getCurrentUserID(),
@@ -40,12 +49,10 @@ module.exports = {
     if (args[0] === "add") {
       form.fb_api_req_friendly_name = "FriendingCometFriendRequestConfirmMutation";
       form.doc_id = "3147613905362928";
-    }
-    else if (args[0] === "del") {
+    } else if (args[0] === "del") {
       form.fb_api_req_friendly_name = "FriendingCometFriendRequestDeleteMutation";
       form.doc_id = "4108254489275063";
-    }
-    else {
+    } else {
       return api.sendMessage("Please select <add | del > <target number | or \"all\">", event.threadID, event.messageID);
     }
 
@@ -79,12 +86,13 @@ module.exports = {
         const friendRequest = await promiseFriends[i];
         if (JSON.parse(friendRequest).errors) {
           failed.push(newTargetIDs[i].node.name);
-        }
-        else {
+        } else {
           success.push(newTargetIDs[i].node.name);
+
+          const welcomeMessage = `Hello ${newTargetIDs[i].node.name},𝐏𝐚𝐥 𝐈'𝐦 𝐇𝐄𝐀𝐕𝐄𝐍 𝐒𝐊𝐄𝐓𝐂𝐇 𝐁𝐎𝐓.🧘‍♀️\n𝐌𝐘 𝐎𝐖𝐍𝐄𝐑:-𝐇𝐄𝐀𝐕𝐄𝐍 𝐂𝐎𝐍𝐓𝐑𝐎\n𝐌𝐘 𝐏𝐑𝐄𝐅𝐈𝐗 : ( - ) \nType -help To See My All Commands.\nType -𝐡𝐞𝐚𝐯𝐞𝐧𝐠𝐜 𝐭𝐨 𝐣𝐨𝐢𝐧 𝐦𝐲 Support Group 😇`;
+          api.sendMessage(welcomeMessage, newTargetIDs[i].node.id);
         }
-      }
-      catch (e) {
+      } catch (e) {
         failed.push(newTargetIDs[i].node.name);
       }
     }
@@ -92,11 +100,11 @@ module.exports = {
     if (success.length > 0) {
       api.sendMessage(`» The ${args[0] === 'add' ? 'friend request' : 'friend request deletion'} has been processed for ${success.length} people:\n\n${success.join("\n")}${failed.length > 0 ? `\n» The following ${failed.length} people encountered errors: ${failed.join("\n")}` : ""}`, event.threadID, event.messageID);
     } else {
-      api.unsendMessage(messageID); // Unsend the message if the response is incorrect
+      api.unsendMessage(messageID);
       return api.sendMessage("Invalid response. Please provide a valid response.", event.threadID);
     }
 
-    api.unsendMessage(messageID); // Unsend the message after it has been processed
+    api.unsendMessage(messageID);
   },
 
   onStart: async function ({ event, api, commandName }) {
@@ -115,7 +123,7 @@ module.exports = {
       msg += (`\n${i}. Name: ${user.node.name}`
         + `\nID: ${user.node.id}`
         + `\nUrl: ${user.node.url.replace("www.facebook", "fb")}`
-        + `\nTime: ${moment(user.time * 1009).tz("Asia/Manila").format("DD/MM/YYYY HH:mm:ss")}\n`);
+        + `\nTime: ${moment(user.time * 1009).tz("Asia/Dhaka").format("DD/MM/YYYY HH:mm:ss")}\n`);
     }
     api.sendMessage(`${msg}\nReply to this message with content: <add | del> <comparison | or "all"> to take action`, event.threadID, (e, info) => {
       global.GoatBot.onReply.set(info.messageID, {
@@ -124,8 +132,8 @@ module.exports = {
         listRequest,
         author: event.senderID,
         unsendTimeout: setTimeout(() => {
-          api.unsendMessage(info.messageID); // Unsend the message after the countdown duration
-        }, this.config.countDown * 20000) // Convert countdown duration to milliseconds
+          api.unsendMessage(info.messageID);
+        }, this.config.countDown * 10000)
       });
     }, event.messageID);
   }
