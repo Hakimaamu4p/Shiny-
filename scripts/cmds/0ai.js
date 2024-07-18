@@ -29,7 +29,7 @@ module.exports = {
 		try {
 			api.sendMessage("⏳ Searching for the answer, please wait...", tid, (err, info) => {
 				if (!err) {
-					api.setMessageReaction("🔍", info.messageID, (reactionErr) => {
+					("🔍", info.messageID, (reactionErr) => {
 						if (reactionErr) {
 							console.error("Error setting reaction:", reactionErr);
 						}
