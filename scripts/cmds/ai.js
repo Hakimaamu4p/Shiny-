@@ -9,7 +9,7 @@ const UPoLPrefix = [
 
   module.exports = {
   config: {
-    name: 'aiv5',
+    name: 'ai',
     version: '1.2.1',
     role: 0,
     category: 'AI',
