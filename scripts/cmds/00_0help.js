@@ -13,7 +13,7 @@ const doNotDelete = "天 | 𝙃𝙀𝘼𝙑𝙀𝙉 𝘽Ø𝙏";
 
 module.exports = {
 				config: {
-								name: "help",
+								name: "help5",
 								version: "1.17",
 								author: "NTKhang", //Modified By Zedric
 								countDown: 5,
