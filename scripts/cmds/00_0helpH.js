@@ -3,11 +3,11 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ 🐐 | GoatBot V2 ]";
+const doNotDelete = "[ 🐐 |𝐇𝐞𝐚𝐯𝐞𝐧'𝐬 𝐆𝐨𝐚𝐭𝐁𝐨𝐭 𝐕𝟐 ]";
 
 module.exports = {
 	config: {
-		name: "help5",
+		name: "help",
 		version: "1.17",
 		author: "NTKhang", // orginal author Kshitiz
 		countDown: 5,
@@ -34,7 +34,7 @@ module.exports = {
 			const categories = {};
 			let msg = "";
 
-			msg += `╔══════════════╗\n     YAZKY CMD💐\n╚══════════════╝`;
+			msg += `╔══════════════╗\n     𝐇𝐄𝐀𝐕𝐄𝐍'𝐒 𝐂𝐌𝐃𝐒🧘‍♀️\n╚══════════════╝`;
 
 			for (const [name, value] of commands) {
 					if (value.config.role > 1 && role < value.config.role) continue;
@@ -46,7 +46,7 @@ module.exports = {
 8
 			Object.keys(categories).forEach(category => {
 					if (category !== "info") {
-							msg += `\n╭────────────⭓\n│『 ${category.toUpperCase()} 』`;
+							msg += `\n╭────────────⭓🧘‍♀️\n│『 ${category.toUpperCase()} 』`;
 
 							const names = categories[category].commands.sort();
 							for (let i = 0; i < names.length; i += 1) {
@@ -54,14 +54,14 @@ module.exports = {
 									msg += `\n${cmds.join(" ".repeat(Math.max(0, 5 - cmds.join("").length)))}`;
 							}
 
-							msg += `\n╰────────⭓`;
+							msg += `\n╰────────⭓🧘‍♀️`;
 					}
 			});
 
 			const totalCommands = commands.size;
 			msg += `\n𝗖𝘂𝗿𝗿𝗲𝗻𝘁𝗹𝘆, 𝘁𝗵𝗲 𝗯𝗼𝘁 𝗵𝗮𝘀 ${totalCommands} 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝘁𝗵𝗮𝘁 𝗰𝗮𝗻 𝗯𝗲 𝘂𝘀𝗲𝗱\n`;
 			msg += `𝗧𝘆𝗽𝗲 ${prefix} 𝗵𝗲𝗹𝗽 𝗰𝗺𝗱𝗡𝗮𝗺𝗲 𝘁𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗱𝗲𝘁𝗮𝗶𝗹𝘀 𝗼𝗳 𝘁𝗵𝗮𝘁 𝗰𝗼𝗺𝗺𝗮𝗻𝗱\n`;
-			msg += `YAZKY AI CHATBOT 💐`;
+			msg += `𝐇𝐄𝐀𝐕𝐄𝐍'𝐒 𝐂𝐇𝐀𝐓𝐁𝐎𝐓 🧘‍♀️`;
 
 
 			const helpListImages = [
@@ -92,9 +92,9 @@ module.exports = {
 				const guideBody = configCommand.guide?.en || "No guide available.";
 				const usage = guideBody.replace(/{p}/g, prefix).replace(/{n}/g, configCommand.name);
 
-				const response = `╭── NAME ────⭓
+				const response = `╭──🤸‍♂️𝐇𝐄𝐀𝐕𝐄𝐍🤸‍♂️────⭓
 	│ ${configCommand.name}
-	├── INFO
+	├──🧘‍♀️ INFO
 	│ Description: ${longDescription}
 	│ Other names: ${configCommand.aliases ? configCommand.aliases.join(", ") : "Do not have"}
 	│ Other names in your group: Do not have
@@ -102,12 +102,12 @@ module.exports = {
 	│ Role: ${roleText}
 	│ Time per command: ${configCommand.countDown || 1}s
 	│ Author: ${author}
-	├── Usage
+	├──🧘‍♀️ Usage
 	│ ${usage}
-	├── Notes
+	├──🧘‍♀️ Notes
 	│ The content inside <XXXXX> can be changed
 	│ The content inside [a|b|c] is a or b or c
-	╰━━━━━━━❖`;
+	╰━━━━━━━❖🧘‍♀️`;
 
 				await message.reply(response);
 			}
