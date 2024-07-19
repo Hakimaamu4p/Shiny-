@@ -15,14 +15,14 @@ module.exports = {
 		envConfig: {}
 	},
 	onStart: async function ({ message }) {
-		const botName = "Astral";
+		const botName = "Heaven Sketch Bot";
 		const botPrefix = "-";
-		const authorName = "Stanley Demokratiko";
-		const ownAge = "18";
-		const teamName = "Astral Team";
-		const authorFB = "https://www.facebook.com/100043265301021";
-		const authorInsta = "Undefined";
-		const tikTok = "None";
+		const authorName = "Heaven contro";
+		const ownAge = "17";
+		const teamName = "Github team Heaven🧘‍♀️";
+		const authorFB = " https://www.facebook.com/profile.php?id=61557094816783";
+		const authorInsta = "Thead469";
+		const tikTok = "tiktok.com/@Heaventhegreat0";
 		const urls = JSON.parse(fs.readFileSync('cliff.json'));
 		const link = urls[Math.floor(Math.random() * urls.length)];
 		const now = moment().tz('Asia/Jakarta');
@@ -37,16 +37,16 @@ module.exports = {
 
 		message.reply({
 			body: `《  Bot & Owner Info 》
-\Name: ${𝐇𝐄𝐀𝐕𝐄𝐍 𝐁𝐎𝐓}
-\Bot Prefix: ${-}
-\owner: ${𝙃𝙀𝘼𝙑𝙀𝙉 𝘾𝙊𝙉𝙏𝙍𝙊}
-\Age : ${17}
-\Facebook: ${https://www.facebook.com/profile.php?id=61557094816783}
-\Instagram: ${nevermind}
-\TikTok: ${unknown}
-\Date: ${date}
+\Name: ${botName}
+\Bot Prefix: ${botPrefix}
+\owner: ${authorName}
+\age : ${ownAge}
+\Facebook: ${authorFB}
+\Instagram: ${authorInsta}
+\TikTok: ${tikTok}
+\Datee: ${date}
 \Time: ${time}
-\Team: ${github team Heaven}
+\Team: ${teamName}
 \Uptime: ${uptimeString}
 \===============`,
 			attachment: await global.utils.getStreamFromURL(link)
