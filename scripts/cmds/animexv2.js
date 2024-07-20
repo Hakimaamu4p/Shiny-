@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = {
   config: {
-    name: "animex",
+    name: "animexv2",
     version: "1.2",
     author: "ArYAN",
     countDown: 0,
