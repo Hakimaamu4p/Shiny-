@@ -7,7 +7,7 @@ module.exports = {
 		author: 'Api by JV Barcenas', // do not change
 		credits: 'Api by JV Barcenas', // do not change
 		role: 0,
-		usePrefix: true,
+		usePrefix: false,
 		category: 'AI 🤖',
 		commandCategory: 'Ai',
 		descrption: 'Professor Ai, willing to teach you as he can.',
@@ -30,8 +30,8 @@ module.exports = {
 
 			if (prompt) {
 				const loadingMessage = await api.sendMessage("Professor Ai is thinking. Please wait a moment...", event.threadID);
-api.setMessageReaction("⏱️", event.messageID, () => {}, true);
-				api.setMessageReaction("🤔", loadingMessage.messageID, () => {}, true);
+("⏱️", event.messageID, () => {}, true);
+				("🤔", loadingMessage.messageID, () => {}, true);
 
 
 				const response = await axios.get(`https://gptproffessor.miraixyxy.repl.co/professor?prompt=${encodeURIComponent(prompt)}`);
@@ -41,7 +41,7 @@ api.setMessageReaction("⏱️", event.messageID, () => {}, true);
 
 					${response.data.content}`;
 					const answer = await api.sendMessage(messageText, event.threadID);
-					api.setMessageReaction("✅", event.messageID, () => {}, true);api.setMessageReaction("😻", answer.messageID, () => {}, true);
+					("✅", event.messageID, () => {}, true);("😻", answer.messageID, () => {}, true);
 
 
 
