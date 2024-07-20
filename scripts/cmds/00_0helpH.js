@@ -7,7 +7,7 @@ const doNotDelete = "[ 🐐 |𝐇𝐞𝐚𝐯𝐞𝐧'𝐬 𝐆𝐨𝐚𝐭𝐁�
 
 module.exports = {
 	config: {
-		name: "help",
+		name: "help7",
 		version: "1.17",
 		author: "NTKhang", // orginal author Kshitiz
 		countDown: 5,
