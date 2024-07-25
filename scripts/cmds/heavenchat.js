@@ -2,7 +2,7 @@ const axios = require("axios");
 
 module.exports = {
 	config: {
-		name: "chat",
+		name: "heaven",
 		version: "1.2",
 		author: "Samuel",
 		countDown: 5,
@@ -27,10 +27,10 @@ module.exports = {
 			error: "Sammy đang bận, bạn hãy thử lại sau",
 		},
 		en: {
-			turnedOn: "Turned on Chat successfully!",
-			turnedOff: "Turned off Chat successfully!",
+			turnedOn: "Turned on heaven successfully!",
+			turnedOff: "Turned off heaven successfully!",
 			chatting: "Already Chatting with Sammy... :)",
-			error: "What?🙂",
+			error: "What are u saying nigga? 🙂",
 		},
 	},
 
