@@ -2,7 +2,7 @@ const axios = require("axios");
 
 module.exports = {
 	config: {
-		name: "heaven",
+		name: "heavenchat",
 		version: "1.2",
 		author: "Samuel",
 		countDown: 5,
