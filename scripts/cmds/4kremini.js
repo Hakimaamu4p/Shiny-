@@ -3,7 +3,7 @@ const tinyurl = require('tinyurl');
 
 module.exports = {
 	config: {
-		name: "4k2",
+		name: "remini",
 		aliases: ["4k", "remini"],
 		version: "1.0",
 		author: "JARiF",
