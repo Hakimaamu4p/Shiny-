@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   config: {
-    name: 'lyrics',
+    name: 'lyricsv4',
     version: '2.0',
     author: 'ArYAN',
     role: 0,
