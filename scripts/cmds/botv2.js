@@ -1,4 +1,4 @@
-var noPrefix = [ "ai", "prefixv2", "liner", "sicbo", "gemini" ];
+var noPrefix = [];
 var  prefix = "?";
 const { getStreamFromURL: st } = global.utils,
  { get, post } = require("axios");
